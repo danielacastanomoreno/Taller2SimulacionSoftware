@@ -8,7 +8,7 @@ export class CalculatorController {
     constructor(private readonly calculatorService: CalculatorService) {}
 
     // Add
-    @Post('add')
+    @Post()
     public addNumbers(
     @Body() operatioDto: OperationDto,
     ): Promise<Number> {
