@@ -7,7 +7,6 @@ export class CalculatorController {
 
     constructor(private readonly calculatorService: CalculatorService) {}
 
-    // Add
     @Post()
     public operateNumbers(
     @Body() operatioDto: OperationDto,

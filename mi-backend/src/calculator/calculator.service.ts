@@ -18,7 +18,7 @@ export class CalculatorService {
       result = number1 + number2;
     }
 
-    // Substract
+    // Substract...
 
     return result;
 
