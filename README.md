@@ -1,6 +1,6 @@
 # Taller2SimulacionSoftware
 
-Equipo Dev:
+## Equipo Dev:
 - **Daniela Castaño Moreno**
 - **Juan Esteban Cuéllar**
 - **Santiago Estrada**
