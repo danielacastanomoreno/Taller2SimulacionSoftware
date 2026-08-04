@@ -6,7 +6,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { add } from "@/hooks/calculator";
+import { add, multiply, subtract } from "@/hooks/calculator";
 
 export default function Calculator() {
 
@@ -38,10 +38,24 @@ export default function Calculator() {
   };
 
   // Subtract
-  const subtractNumbers = (): void => {};
+  const subtractNumbers = async () => {
+    try {
+      const res = await subtract(parseFloat(number1), parseFloat(number2));
+      setResult("" + res);
+    } catch (error) {
+      setResult("An error ocurred.");
+    }
+  };
 
   // Multiply
-  const multiplyNumbers = (): void => {};
+  const multiplyNumbers = async () => {
+    try {
+      const res = await multiply(parseFloat(number1), parseFloat(number2));
+      setResult("" + res);
+    } catch (error) {
+      setResult("An error ocurred.");
+    }
+  };
 
   // Divide
   const divideNumbers = (): void => {};
