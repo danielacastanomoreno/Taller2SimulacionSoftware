@@ -6,10 +6,11 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { add, appStatus } from "@/hooks/calculator";
+import { add } from "@/hooks/calculator";
 import { useRouter } from "next/navigation";
 
-export default function Calculator() {
+const Calculator = () => {
+
   const router = useRouter();
   const [number1, setNumber1] = useState<string>("");
   const [number2, setNumber2] = useState<string>("");
@@ -55,7 +56,7 @@ export default function Calculator() {
   };
 
   // App status function
-  const status = async (): Promise<void> => {
+  const appStatus = async (): Promise<void> => {
     router.push("/status");
   };
 
@@ -138,7 +139,7 @@ export default function Calculator() {
           </Button>
           <br />
           <br />
-          <Button variant="outline" className="w-full" onClick={status}>
+          <Button variant="outline" className="w-full" onClick={appStatus}>
             App status
           </Button>
         </CardContent>
@@ -146,3 +147,5 @@ export default function Calculator() {
     </div>
   );
 }
+
+export default Calculator;
