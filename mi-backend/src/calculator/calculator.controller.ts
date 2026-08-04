@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CalculatorService } from './calculator.service';
 import { OperationDto } from './dto/operation.dto';
 
@@ -14,5 +14,9 @@ export class CalculatorController {
         return this.calculatorService.operate(operatioDto);
     }
 
-
+    @Get('health')
+    public getSystemStatus(): Promise<string> {
+        return this.calculatorService.getSystemStatus();
+    }
+    
 }

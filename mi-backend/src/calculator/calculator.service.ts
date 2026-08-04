@@ -24,4 +24,8 @@ export class CalculatorService {
 
   }
 
+  async getSystemStatus(): Promise<string> {
+    return "MUESTRA EL ESTADO DEL SISTEMA";
+  }
+
 }
