@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString} from 'class-validator';
 
 export class OperationDto {
 
@@ -9,5 +9,9 @@ export class OperationDto {
   @IsNumber()
   @IsNotEmpty()
   readonly number2: number;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly operator: string;
 
 }

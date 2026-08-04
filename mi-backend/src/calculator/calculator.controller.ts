@@ -9,10 +9,10 @@ export class CalculatorController {
 
     // Add
     @Post()
-    public addNumbers(
+    public operateNumbers(
     @Body() operatioDto: OperationDto,
     ): Promise<Number> {
-        return this.calculatorService.add(operatioDto);
+        return this.calculatorService.operate(operatioDto);
     }
 
 
