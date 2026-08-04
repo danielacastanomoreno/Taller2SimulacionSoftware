@@ -14,3 +14,11 @@ export const add = async (
   const result = res.data;
   return result;
 };
+
+export const appStatus = async (
+) => {
+  const res = await ax.get(`/health`);
+
+  const result = res.data;
+  return result;
+};

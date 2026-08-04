@@ -6,10 +6,11 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { add } from "@/hooks/calculator";
+import { add, appStatus } from "@/hooks/calculator";
+import { useRouter } from "next/navigation";
 
 export default function Calculator() {
-
+  const router = useRouter();
   const [number1, setNumber1] = useState<string>("");
   const [number2, setNumber2] = useState<string>("");
   const [result, setResult] = useState<string>("");
@@ -27,7 +28,7 @@ export default function Calculator() {
   // OPERATIONS //
 
   // Add
-  const addNumbers = async () => {
+  const addNumbers = async (): Promise<void> => {
     try {
       const res = await add(parseFloat(number1), parseFloat(number2), "add");
       setResult("" + res);
@@ -51,6 +52,11 @@ export default function Calculator() {
     setNumber1("");
     setNumber2("");
     setResult("");
+  };
+
+  // App status function
+  const status = async (): Promise<void> => {
+    router.push("/status");
   };
 
   return (
@@ -129,6 +135,11 @@ export default function Calculator() {
           {/* Clear button to reset inputs and result */}
           <Button variant="outline" className="w-full" onClick={clear}>
             Clear
+          </Button>
+          <br />
+          <br />
+          <Button variant="outline" className="w-full" onClick={status}>
+            App status
           </Button>
         </CardContent>
       </Card>

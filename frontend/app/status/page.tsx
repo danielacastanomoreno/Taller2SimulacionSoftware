@@ -1,9 +1,9 @@
-import Calculator from "@/components/Calculator";
+import Status from "@/components/Status";
 
 export default function Home() {
   return (
     <div>
-      <Calculator />
+      <Status />
     </div>
   );
 }
