@@ -19,6 +19,14 @@ export class CalculatorService {
     }
 
     // Substract...
+    if (operator === 'substract'){
+      result = number1 - number2
+    }
+
+    //multiplication
+    if (operator === 'multiplication'){
+      result = number1 * number2
+    }
 
     return result;
 
