@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { OperationDto } from './dto/operation.dto';
+import { HealthCheckDto } from './dto/health-check.dto';
+import { response } from 'express';
 
 @Injectable()
 export class CalculatorService {
@@ -8,11 +10,9 @@ export class CalculatorService {
   // OPERATIONS //
 
   async operate(operation: OperationDto): Promise<Number> {
-
     const { number1, number2, operator } = operation; // Object destructuring
     let result = 0;
 
-    
     // Add
     if (operator === 'add') {
       result = number1 + number2;
@@ -21,11 +21,36 @@ export class CalculatorService {
     // Substract...
 
     return result;
-
   }
 
-  async getSystemStatus(): Promise<string> {
-    return "MUESTRA EL ESTADO DEL SISTEMA";
+  // Health check
+  async getSystemStatus(): Promise<HealthCheckDto> {
+    const process = require('process');
+    // Import the filesystem module
+    const fs = require('fs');
+    let allowed = false;
+
+    // Test both the read and write permissions
+    fs.access(
+      './src/persistency/persistent.json', // Cambiar cuando HU3 este lista y pasarle ruta de donde este el archivo .JSON para validar permisos de escritura. ¡OJO!
+      fs.constants.W_OK,
+      (err: any) => {
+        if (err){
+          allowed = false;
+        }  
+        else {
+          allowed = true;
+        }
+      },
+    );
+
+    const result: HealthCheckDto = {
+      status: response.statusCode,
+      uptime: parseFloat(process.uptime()),
+      permissions: allowed, 
+    };
+
+    return result;
   }
 
 }
