@@ -1,9 +1,8 @@
 import axios from "axios";
 
-
 export const ax = axios.create({
-    baseURL: process.env.BACKEND_URL,
+    baseURL: "http://localhost:3000",
+    withCredentials: true, 
 });
-
 
 export default {ax};
