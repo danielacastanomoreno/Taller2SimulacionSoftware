@@ -17,7 +17,8 @@ export const add = async (
 
 export const appStatus = async (
 ) => {
-  const res = await ax.get(`/health`);
+  const res = await ax.get(`calculator/health`);
+  console.log(res);
 
   const result = res.data;
   return result;
