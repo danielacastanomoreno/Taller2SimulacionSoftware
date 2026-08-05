@@ -9,5 +9,4 @@ import { HistoryModule } from '../history/history.module';
   providers: [CalculatorService],
   exports: [CalculatorService],
 })
-
 export class CalculatorModule {}

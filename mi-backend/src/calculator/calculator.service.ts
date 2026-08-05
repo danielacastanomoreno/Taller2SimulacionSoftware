@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { OperationDto } from './dto/operation.dto';
 import { HealthCheckDto } from './dto/health-check.dto';
 import { response } from 'express';
@@ -7,12 +7,13 @@ import { HistoryService } from '../history/history.service';
 
 @Injectable()
 export class CalculatorService {
+  private readonly logger = new Logger(CalculatorService.name);
+
   constructor(private readonly historyService: HistoryService) {}
 
   // OPERATIONS //
 
   async operate(operation: OperationDto): Promise<number> {
-    
     const { operator } = operation; // Object destructuring
     let result = 0;
 
@@ -22,13 +23,18 @@ export class CalculatorService {
     }
 
     // Subtract
-    if (operator === 'subtract'){
+    if (operator === 'subtract') {
       result = await this.subtract(operation);
     }
 
     // Multiply
-    if (operator === 'multiply' || operator === 'multiplication'){
+    if (operator === 'multiply' || operator === 'multiplication') {
       result = await this.multiply(operation);
+    }
+
+    // Divide
+    if (operator === 'divide' || operator === 'division') {
+      result = await this.divide(operation);
     }
 
     return result;
@@ -46,10 +52,9 @@ export class CalculatorService {
       './src/persistency/persistent.json', // Cambiar cuando HU3 este lista y pasarle ruta de donde este el archivo .JSON para validar permisos de escritura. ¡OJO!
       fs.constants.W_OK,
       (err: any) => {
-        if (err){
+        if (err) {
           allowed = false;
-        }  
-        else {
+        } else {
           allowed = true;
         }
       },
@@ -58,7 +63,7 @@ export class CalculatorService {
     const result: HealthCheckDto = {
       status: response.statusCode,
       uptime: parseFloat(process.uptime()),
-      permissions: allowed, 
+      permissions: allowed,
     };
 
     return result;
@@ -68,7 +73,11 @@ export class CalculatorService {
     const { number1, number2 } = numbers;
     const result = number1 + number2;
     await this.historyService.saveOperation({
-      operator: 'add', number1, number2, result, date: new Date().toISOString(),
+      operator: 'add',
+      number1,
+      number2,
+      result,
+      date: new Date().toISOString(),
     });
     return result;
   }
@@ -77,7 +86,11 @@ export class CalculatorService {
     const { number1, number2 } = numbers;
     const result = number1 - number2;
     await this.historyService.saveOperation({
-      operator: 'subtract', number1, number2, result, date: new Date().toISOString(),
+      operator: 'subtract',
+      number1,
+      number2,
+      result,
+      date: new Date().toISOString(),
     });
     return result;
   }
@@ -86,9 +99,37 @@ export class CalculatorService {
     const { number1, number2 } = numbers;
     const result = number1 * number2;
     await this.historyService.saveOperation({
-      operator: 'multiply', number1, number2, result, date: new Date().toISOString(),
+      operator: 'multiply',
+      number1,
+      number2,
+      result,
+      date: new Date().toISOString(),
     });
     return result;
   }
 
+  async divide(numbers: NumbersDto): Promise<number> {
+    const { number1, number2 } = numbers;
+
+    if (number2 === 0) {
+      this.logger.error(
+        `Division by zero rejected: number1=${number1}, number2=${number2}`,
+      );
+      throw new BadRequestException({
+        statusCode: 400,
+        error: 'Bad Request',
+        message: 'No es posible dividir entre cero.',
+      });
+    }
+
+    const result = number1 / number2;
+    await this.historyService.saveOperation({
+      operator: 'divide',
+      number1,
+      number2,
+      result,
+      date: new Date().toISOString(),
+    });
+    return result;
+  }
 }

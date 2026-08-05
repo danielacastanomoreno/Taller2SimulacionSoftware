@@ -23,6 +23,18 @@ describe('AppController (e2e)', () => {
       .expect('Hello World!');
   });
 
+  it('/calculator/divide (POST) returns 400 when denominator is zero', () => {
+    return request(app.getHttpServer())
+      .post('/calculator/divide')
+      .send({ number1: 10, number2: 0 })
+      .expect(400)
+      .expect({
+        statusCode: 400,
+        error: 'Bad Request',
+        message: 'No es posible dividir entre cero.',
+      });
+  });
+
   afterEach(async () => {
     await app.close();
   });
