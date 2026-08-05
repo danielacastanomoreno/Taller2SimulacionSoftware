@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CalculatorService } from './calculator.service';
 import { OperationDto } from './dto/operation.dto';
-import { HealthCheckDto } from './dto/health-check.dto';
+import { NumbersDto } from './dto/numbers.dto';
 
 @Controller('calculator')
 export class CalculatorController {
@@ -11,13 +11,22 @@ export class CalculatorController {
     @Post()
     public operateNumbers(
     @Body() operatioDto: OperationDto,
-    ): Promise<Number> {
+    ): Promise<number> {
         return this.calculatorService.operate(operatioDto);
     }
 
-    @Get('health')
-    public getSystemStatus(): Promise<HealthCheckDto> {
-        return this.calculatorService.getSystemStatus();
+    @Post('subtract')
+    public subtractNumbers(
+    @Body() numbersDto: NumbersDto,
+    ): Promise<number> {
+        return this.calculatorService.subtract(numbersDto);
     }
-    
+
+    @Post('multiply')
+    public multiplyNumbers(
+    @Body() numbersDto: NumbersDto,
+    ): Promise<number> {
+        return this.calculatorService.multiply(numbersDto);
+    }
+
 }
