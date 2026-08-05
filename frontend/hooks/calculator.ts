@@ -49,3 +49,12 @@ export const divide = async (number1: number, number2: number) => {
   const result = res.data;
   return result;
 };
+
+
+export const appStatus = async() => {
+  const res = await ax.get('/calculator/health');
+  
+  const result = res.data;
+  return result;
+
+}
