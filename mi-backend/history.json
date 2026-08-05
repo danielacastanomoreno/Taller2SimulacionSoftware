@@ -5,5 +5,33 @@
     "number2": 1,
     "result": 2,
     "date": "2026-08-05T02:47:56.900Z"
+  },
+  {
+    "operator": "add",
+    "number1": 1,
+    "number2": 2,
+    "result": 3,
+    "date": "2026-08-05T12:19:26.638Z"
+  },
+  {
+    "operator": "subtract",
+    "number1": 1,
+    "number2": 2,
+    "result": -1,
+    "date": "2026-08-05T12:19:27.560Z"
+  },
+  {
+    "operator": "multiply",
+    "number1": 1,
+    "number2": 2,
+    "result": 2,
+    "date": "2026-08-05T12:19:29.028Z"
+  },
+  {
+    "operator": "divide",
+    "number1": 1,
+    "number2": 2,
+    "result": 0.5,
+    "date": "2026-08-05T12:19:30.117Z"
   }
 ]
