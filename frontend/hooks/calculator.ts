@@ -58,3 +58,17 @@ export const appStatus = async() => {
   return result;
 
 }
+
+export type HistoryRecord = {
+  operator: string;
+  number1: number;
+  number2: number;
+  result: number;
+  date: string;
+};
+
+export const getHistory = async (): Promise<HistoryRecord[]> => {
+  const res = await ax.get(`/history`);
+  const result = res.data;
+  return result;
+};

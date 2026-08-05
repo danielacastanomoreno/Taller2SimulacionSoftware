@@ -1,14 +1,13 @@
 "use client"; // Enables client-side rendering for this component
 
-import { useState, ChangeEvent } from "react";
-import axios from "axios";
+import { useState, useEffect, ChangeEvent } from "react";
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { add, divide, multiply, subtract } from "@/hooks/calculator";
 import { useRouter } from "next/navigation";
+import { add, multiply, subtract, getHistory, HistoryRecord, divide } from "@/hooks/calculator";
 
 type CalculatorErrorResponse = {
   message?: string | string[];
@@ -20,6 +19,7 @@ const Calculator = () => {
   const [number2, setNumber2] = useState<string>("");
   const [result, setResult] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [history, setHistory] = useState<HistoryRecord[]>([]);
 
   // Handle inputs
 
@@ -31,23 +31,22 @@ const Calculator = () => {
     setNumber2(e.target.value);
   };
 
-  // OPERATIONS //
+  // HISTORY //
 
-  const getErrorMessage = (error: unknown): string => {
-    if (axios.isAxiosError<CalculatorErrorResponse>(error)) {
-      const message = error.response?.data?.message;
-
-      if (Array.isArray(message)) {
-        return message.join(" ");
-      }
-
-      if (message) {
-        return message;
-      }
+  const loadHistory = async () => {
+    try {
+      const res = await getHistory();
+      setHistory(res);
+    } catch (error) {
+      // If it fails, we simply leave the previous history as is
     }
-
-    return "An error occurred.";
   };
+
+  useEffect(() => {
+    loadHistory();
+  }, []);
+
+  // OPERATIONS //
 
   // Add
   const addNumbers = async (): Promise<void> => {
@@ -55,9 +54,10 @@ const Calculator = () => {
       const res = await add(parseFloat(number1), parseFloat(number2), "add");
       setResult("" + res);
       setErrorMessage("");
+      loadHistory();
     } catch (error) {
       setResult("");
-      setErrorMessage(getErrorMessage(error));
+      setErrorMessage("An error ocurred");
     }
   };
 
@@ -67,9 +67,10 @@ const Calculator = () => {
       const res = await subtract(parseFloat(number1), parseFloat(number2));
       setResult("" + res);
       setErrorMessage("");
+      loadHistory();
     } catch (error) {
       setResult("");
-      setErrorMessage(getErrorMessage(error));
+      setErrorMessage("An error ocurred");
     }
   };
 
@@ -79,9 +80,10 @@ const Calculator = () => {
       const res = await multiply(parseFloat(number1), parseFloat(number2));
       setResult("" + res);
       setErrorMessage("");
+      loadHistory();
     } catch (error) {
       setResult("");
-      setErrorMessage(getErrorMessage(error));
+      setErrorMessage("An error ocurred");
     }
   };
 
@@ -93,7 +95,7 @@ const Calculator = () => {
       setErrorMessage("");
     } catch (error) {
       setResult("");
-      setErrorMessage(getErrorMessage(error));
+      setErrorMessage("An error ocurred");
     }
   };
 
@@ -200,7 +202,8 @@ const Calculator = () => {
         </CardContent>
       </Card>
     </div>
-  );
+  )
+
 };
 
 export default Calculator;
