@@ -49,7 +49,7 @@ export class CalculatorService {
 
     // Test both the read and write permissions
     fs.access(
-      './src/history.json', // Cambiar cuando HU3 este lista y pasarle ruta de donde este el archivo .JSON para validar permisos de escritura. ¡OJO!
+      'history.json', // Cambiar cuando HU3 este lista y pasarle ruta de donde este el archivo .JSON para validar permisos de escritura. ¡OJO!
       fs.constants.W_OK,
       (err: any) => {
         if (err) {
