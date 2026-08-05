@@ -5,5 +5,12 @@
     "number2": 1,
     "result": 2,
     "date": "2026-08-05T02:47:56.900Z"
+  },
+  {
+    "operator": "multiply",
+    "number1": 50,
+    "number2": 2,
+    "result": 100,
+    "date": "2026-08-05T12:31:27.275Z"
   }
 ]

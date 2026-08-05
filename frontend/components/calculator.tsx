@@ -1,18 +1,19 @@
 "use client"; // Enables client-side rendering for this component
 
-import { useState, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { add, multiply, subtract } from "@/hooks/calculator";
+import { add, multiply, subtract, getHistory, HistoryRecord } from "@/hooks/calculator";
 
 export default function Calculator() {
 
   const [number1, setNumber1] = useState<string>("");
   const [number2, setNumber2] = useState<string>("");
   const [result, setResult] = useState<string>("");
+  const [history, setHistory] = useState<HistoryRecord[]>([]);
 
   // Handle inputs
 
@@ -24,6 +25,21 @@ export default function Calculator() {
     setNumber2(e.target.value);
   };
 
+  // HISTORY //
+
+  const loadHistory = async () => {
+    try {
+      const res = await getHistory();
+      setHistory(res);
+    } catch (error) {
+      // If it fails, we simply leave the previous history as is
+    }
+  };
+
+  useEffect(() => {
+    loadHistory();
+  }, []);
+
   // OPERATIONS //
 
   // Add
@@ -31,6 +47,7 @@ export default function Calculator() {
     try {
       const res = await add(parseFloat(number1), parseFloat(number2), "add");
       setResult("" + res);
+      loadHistory();
     } catch (error) {
       setResult("An error ocurred.");
       //setResult("" + error);
@@ -42,6 +59,7 @@ export default function Calculator() {
     try {
       const res = await subtract(parseFloat(number1), parseFloat(number2));
       setResult("" + res);
+      loadHistory();
     } catch (error) {
       setResult("An error ocurred.");
     }
@@ -52,6 +70,7 @@ export default function Calculator() {
     try {
       const res = await multiply(parseFloat(number1), parseFloat(number2));
       setResult("" + res);
+      loadHistory();
     } catch (error) {
       setResult("An error ocurred.");
     }
@@ -144,6 +163,20 @@ export default function Calculator() {
           <Button variant="outline" className="w-full" onClick={clear}>
             Clear
           </Button>
+          {/* History of the last 5 operations (SoR) */}
+          <div className="flex flex-col space-y-2">
+            <Label>Últimas operaciones</Label>
+            <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
+              {history.length === 0 && (
+                <li className="text-gray-400">Sin operaciones registradas.</li>
+              )}
+              {history.map((item, index) => (
+                <li key={index}>
+                  {item.number1} {item.operator} {item.number2} = {item.result}
+                </li>
+              ))}
+            </ul>
+          </div>
         </CardContent>
       </Card>
     </div>
