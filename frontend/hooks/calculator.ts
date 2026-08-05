@@ -39,3 +39,13 @@ export const multiply = async (number1: number, number2: number) => {
   const result = res.data;
   return result;
 };
+
+export const divide = async (number1: number, number2: number) => {
+  const res = await ax.post(`/calculator/divide`, {
+    number1,
+    number2,
+  } satisfies CalculatorNumbersRequest);
+
+  const result = res.data;
+  return result;
+};

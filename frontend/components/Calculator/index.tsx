@@ -1,20 +1,25 @@
 "use client"; // Enables client-side rendering for this component
 
 import { useState, ChangeEvent } from "react";
+import axios from "axios";
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { add, multiply, subtract } from "@/hooks/calculator";
+import { add, divide, multiply, subtract } from "@/hooks/calculator";
 import { useRouter } from "next/navigation";
 
-const Calculator = () => {
+type CalculatorErrorResponse = {
+  message?: string | string[];
+};
 
+const Calculator = () => {
   const router = useRouter();
   const [number1, setNumber1] = useState<string>("");
   const [number2, setNumber2] = useState<string>("");
   const [result, setResult] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   // Handle inputs
 
@@ -28,45 +33,76 @@ const Calculator = () => {
 
   // OPERATIONS //
 
+  const getErrorMessage = (error: unknown): string => {
+    if (axios.isAxiosError<CalculatorErrorResponse>(error)) {
+      const message = error.response?.data?.message;
+
+      if (Array.isArray(message)) {
+        return message.join(" ");
+      }
+
+      if (message) {
+        return message;
+      }
+    }
+
+    return "An error occurred.";
+  };
+
   // Add
   const addNumbers = async (): Promise<void> => {
     try {
       const res = await add(parseFloat(number1), parseFloat(number2), "add");
       setResult("" + res);
+      setErrorMessage("");
     } catch (error) {
-      setResult("An error ocurred.");
-      //setResult("" + error);
+      setResult("");
+      setErrorMessage(getErrorMessage(error));
     }
   };
 
   // Subtract
-  const subtractNumbers = async () => {
+  const subtractNumbers = async (): Promise<void> => {
     try {
       const res = await subtract(parseFloat(number1), parseFloat(number2));
       setResult("" + res);
+      setErrorMessage("");
     } catch (error) {
-      setResult("An error ocurred.");
+      setResult("");
+      setErrorMessage(getErrorMessage(error));
     }
   };
 
   // Multiply
-  const multiplyNumbers = async () => {
+  const multiplyNumbers = async (): Promise<void> => {
     try {
       const res = await multiply(parseFloat(number1), parseFloat(number2));
       setResult("" + res);
+      setErrorMessage("");
     } catch (error) {
-      setResult("An error ocurred.");
+      setResult("");
+      setErrorMessage(getErrorMessage(error));
     }
   };
 
   // Divide
-  const divideNumbers = (): void => {};
+  const divideNumbers = async (): Promise<void> => {
+    try {
+      const res = await divide(parseFloat(number1), parseFloat(number2));
+      setResult("" + res);
+      setErrorMessage("");
+    } catch (error) {
+      setResult("");
+      setErrorMessage(getErrorMessage(error));
+    }
+  };
 
   // Function to clear the inputs and result
   const clear = (): void => {
     setNumber1("");
     setNumber2("");
     setResult("");
+    setErrorMessage("");
   };
 
   // App status function
@@ -146,6 +182,11 @@ const Calculator = () => {
               placeholder="Result"
               readOnly
             />
+            {errorMessage && (
+              <p className="text-sm font-medium text-red-600 dark:text-red-400">
+                {errorMessage}
+              </p>
+            )}
           </div>
           {/* Clear button to reset inputs and result */}
           <Button variant="outline" className="w-full" onClick={clear}>
@@ -160,6 +201,6 @@ const Calculator = () => {
       </Card>
     </div>
   );
-}
+};
 
 export default Calculator;
