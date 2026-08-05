@@ -3,10 +3,11 @@ import { OperationDto } from './dto/operation.dto';
 import { HealthCheckDto } from './dto/health-check.dto';
 import { response } from 'express';
 import { NumbersDto } from './dto/numbers.dto';
+import { HistoryService } from '../history/history.service';
 
 @Injectable()
 export class CalculatorService {
-  constructor() {}
+  constructor(private readonly historyService: HistoryService) {}
 
   // OPERATIONS //
 
@@ -65,17 +66,29 @@ export class CalculatorService {
 
   async add(numbers: NumbersDto): Promise<number> {
     const { number1, number2 } = numbers;
-    return number1 + number2;
+    const result = number1 + number2;
+    await this.historyService.saveOperation({
+      operator: 'add', number1, number2, result, date: new Date().toISOString(),
+    });
+    return result;
   }
 
   async subtract(numbers: NumbersDto): Promise<number> {
     const { number1, number2 } = numbers;
-    return number1 - number2;
+    const result = number1 - number2;
+    await this.historyService.saveOperation({
+      operator: 'subtract', number1, number2, result, date: new Date().toISOString(),
+    });
+    return result;
   }
 
   async multiply(numbers: NumbersDto): Promise<number> {
     const { number1, number2 } = numbers;
-    return number1 * number2;
+    const result = number1 * number2;
+    await this.historyService.saveOperation({
+      operator: 'multiply', number1, number2, result, date: new Date().toISOString(),
+    });
+    return result;
   }
 
 }
