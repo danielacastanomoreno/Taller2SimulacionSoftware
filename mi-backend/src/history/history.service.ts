@@ -10,7 +10,7 @@ export interface HistoryRecord {
   date: string;
 }
 
-const HISTORY_FILE = join(process.cwd(), 'history.json');
+const HISTORY_FILE = process.env.HISTORY_FILE ?? join(process.cwd(), 'history.json');
 
 @Injectable()
 export class HistoryService {
