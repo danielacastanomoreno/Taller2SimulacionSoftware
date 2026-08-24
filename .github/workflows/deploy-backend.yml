@@ -1,0 +1,40 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        working-directory: mi-backend
+        run: |
+          docker build \
+            -t mi-backend:${{ github.sha }} \
+            -t mi-backend:latest \
+            .
+
+      - name: Stop and remove existing container
+        run: |
+          docker stop mi-backend-app 2>/dev/null || true
+          docker rm mi-backend-app 2>/dev/null || true
+
+      - name: Run new container
+        run: |
+          docker run -d \
+            --name mi-backend-app \
+            --restart unless-stopped \
+            -p 3000:3000 \
+            -e PORT=3000 \
+            mi-backend:${{ github.sha }}
+
+      - name: Clean up dangling images
+        run: docker image prune -f
+        continue-on-error: true
