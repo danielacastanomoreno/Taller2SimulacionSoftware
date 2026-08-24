@@ -1,0 +1,29 @@
+{
+  "name": "taller2simulacionsoftware",
+  "version": "1.0.0",
+  "description": "- **Daniela Castaño Moreno** - **Santiago Estrada** - **Esteban Cuéllar**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielacastanomoreno/Taller2SimulacionSoftware.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/danielacastanomoreno/Taller2SimulacionSoftware/issues"
+  },
+  "homepage": "https://github.com/danielacastanomoreno/Taller2SimulacionSoftware#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "nodemon": "^3.1.14",
+    "typescript": "^7.0.2"
+  }
+}
