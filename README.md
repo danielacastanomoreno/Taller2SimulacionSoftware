@@ -4,3 +4,4 @@
 - **Daniela Castaño Moreno**
 - **Santiago Estrada**
 - **Esteban Cuéllar**
+- **Juan Camilo Rubio Arboleda**
