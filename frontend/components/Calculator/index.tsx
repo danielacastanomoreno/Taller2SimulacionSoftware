@@ -56,15 +56,16 @@ const Calculator = () => {
       setErrorMessage("");
       loadHistory();
     } catch (error) {
+      console.log(error);
       setResult("");
-      setErrorMessage("An error ocurred");
+      //setErrorMessage("An error ocurred");
     }
   };
 
   // Subtract
   const subtractNumbers = async (): Promise<void> => {
     try {
-      const res = await subtract(parseFloat(number1), parseFloat(number2));
+      const res = await subtract(parseFloat(number1), parseFloat(number2), "subtract");
       setResult("" + res);
       setErrorMessage("");
       loadHistory();
@@ -77,7 +78,7 @@ const Calculator = () => {
   // Multiply
   const multiplyNumbers = async (): Promise<void> => {
     try {
-      const res = await multiply(parseFloat(number1), parseFloat(number2));
+      const res = await multiply(parseFloat(number1), parseFloat(number2), "multiply");
       setResult("" + res);
       setErrorMessage("");
       loadHistory();
@@ -90,7 +91,7 @@ const Calculator = () => {
   // Divide
   const divideNumbers = async (): Promise<void> => {
     try {
-      const res = await divide(parseFloat(number1), parseFloat(number2));
+      const res = await divide(parseFloat(number1), parseFloat(number2), "divide");
       setResult("" + res);
       setErrorMessage("");
     } catch (error) {

@@ -1,8 +1,9 @@
 import { ax } from "@/utils/axiosConfig";
 
-type CalculatorNumbersRequest = {
+type OperationRequest = {
   number1: number;
   number2: number;
+  operator: string;
 };
 
 export const add = async (
@@ -17,34 +18,38 @@ export const add = async (
   });
 
   const result = res.data;
+  console.log("RESULT: ", result)
   return result;
 };
 
-export const subtract = async (number1: number, number2: number) => {
-  const res = await ax.post(`/calculator/subtract`, {
+export const subtract = async (number1: number, number2: number, operator: string) => {
+  const res = await ax.post(`/calculator`, {
     number1,
     number2,
-  } satisfies CalculatorNumbersRequest);
+    operator: operator,
+  } satisfies OperationRequest);
 
   const result = res.data;
   return result;
 };
 
-export const multiply = async (number1: number, number2: number) => {
-  const res = await ax.post(`/calculator/multiply`, {
+export const multiply = async (number1: number, number2: number, operator: string) => {
+  const res = await ax.post(`/calculator`, {
     number1,
     number2,
-  } satisfies CalculatorNumbersRequest);
+    operator
+  });
 
   const result = res.data;
   return result;
 };
 
-export const divide = async (number1: number, number2: number) => {
-  const res = await ax.post(`/calculator/divide`, {
+export const divide = async (number1: number, number2: number, operator: string) => {
+  const res = await ax.post(`/calculator`, {
     number1,
     number2,
-  } satisfies CalculatorNumbersRequest);
+    operator
+  });
 
   const result = res.data;
   return result;
@@ -68,6 +73,7 @@ export type HistoryRecord = {
 };
 
 export const getHistory = async (): Promise<HistoryRecord[]> => {
+  console.log("base: ", ax.arguments);
   const res = await ax.get(`/history`);
   const result = res.data;
   return result;

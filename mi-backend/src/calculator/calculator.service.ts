@@ -17,22 +17,22 @@ export class CalculatorService {
     let result = 0;
 
     // Add
-    if (operator === 'add' || operator === 'sum' || operator ==='addition') {
+    if (operator === 'add') {
       result = await this.add(number1, number2);
     }
 
     // Subtract
-    if (operator === 'subtract' || operator === 'subtraction') {
+    if (operator === 'subtract') {
       result = await this.subtract(number1, number2);
     }
 
     // Multiply
-    if (operator === 'multiply' || operator === 'multiplication') {
+    if (operator === 'multiply') {
       result = await this.multiply(number1, number2);
     }
 
     // Divide
-    if (operator === 'divide' || operator === 'division') {
+    if (operator === 'divide') {
       result = await this.divide(number1, number2);
     }
 
