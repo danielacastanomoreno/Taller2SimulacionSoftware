@@ -47,5 +47,47 @@
     "number2": 1,
     "result": 1,
     "date": "2026-08-05T13:12:40.912Z"
+  },
+  {
+    "operator": "divide",
+    "number1": 12,
+    "number2": 8,
+    "result": 1.5,
+    "date": "2026-08-30T21:47:31.996Z"
+  },
+  {
+    "operator": "divide",
+    "number1": 12,
+    "number2": 8,
+    "result": 1.5,
+    "date": "2026-08-30T22:13:48.374Z"
+  },
+  {
+    "operator": "multiply",
+    "number1": 12,
+    "number2": 8,
+    "result": 96,
+    "date": "2026-08-30T22:14:17.393Z"
+  },
+  {
+    "operator": "subtract",
+    "number1": 12,
+    "number2": 8,
+    "result": 4,
+    "date": "2026-08-30T22:15:09.799Z"
+  },
+  {
+    "operator": "add",
+    "number1": 12,
+    "number2": 8,
+    "result": 20,
+    "date": "2026-08-30T22:15:15.764Z"
+  },
+  {
+    "operator": "add",
+    "number1": 12,
+    "number2": 8,
+    "result": 20,
+    "date": "2026-08-30T22:15:18.155Z"
   }
 ]
