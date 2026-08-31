@@ -1,4 +1,4 @@
-name: Deploy with Docker (Docker Branch)
+name: Deploy with Docker (Fixes Branch)
 
 on:
   push:
