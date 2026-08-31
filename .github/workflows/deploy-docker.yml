@@ -43,22 +43,4 @@ jobs:
           docker ps --filter "name=mi-backend"
           docker ps --filter "name=frontend"
 
-      - name: Deploy Nginx Reverse Proxy Config
-        run: |
-          DEST_DIR="/home/iaslab/ingesoftV/dasaescafa-calculator-docker"
-          mkdir -p "$DEST_DIR"
-          cp nginx.conf "$DEST_DIR/nginx.conf"
-          chmod -R 755 "$DEST_DIR"
-          echo "Configuracion de Nginx copiada a $DEST_DIR/nginx.conf"
-
-      - name: Test & Reload Nginx
-        run: |
-          sudo nginx -t
-          sudo systemctl reload nginx
-          echo "Nginx recargado exitosamente con proxy hacia el contenedor Docker."
-
-      - name: Container Healthcheck
-        run: |
-          sleep 2
-          curl -sI http://127.0.0.1:9088/ | head -n 5
-          echo "Contenedor respondiendo correctamente en puerto 9088."
+      
