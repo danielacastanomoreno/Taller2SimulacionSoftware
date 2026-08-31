@@ -6,7 +6,7 @@ services:
     container_name: container-backend
     restart: unless-stopped
     ports:
-      "3000:3000"
+      - "3000:3000"
     volumes:
       - backend-history:/app/data
 
@@ -18,7 +18,7 @@ services:
     container_name: container-frontend
     restart: unless-stopped
     ports:
-      "3001:3000"
+      - "3001:3000"
     depends_on:
       - backend
 
