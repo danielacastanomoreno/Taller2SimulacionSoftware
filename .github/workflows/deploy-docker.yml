@@ -1,3 +1,10 @@
+# El workflow esta pendiente de los eventos.
+# Busca si existe los .yml que tiene los pipelines.
+
+# Los runner son los encargados de correr los workflows.
+# El runner revisa si hay eventos asociados, lo baja y lo corre. Hace como un 
+# pull
+
 name: Deploy with Docker (Fixes Branch)
 
 on:
@@ -18,7 +25,7 @@ jobs:
       - name: Diagnostics & Environment Info
         run: |
           echo "=========================================="
-          echo "  Modo: Despliegue con Docker (Rama Docker)"
+          echo "  Modo: Despliegue con Docker (Rama Fixes)"
           echo "  Host: $(hostname)"
           echo "  Usuario: $(whoami)"
           echo "  Directorio: $(pwd)"
@@ -39,7 +46,7 @@ jobs:
 
       - name: Deploy Nginx Reverse Proxy Config
         run: |
-          DEST_DIR="/home/daniela/dasaescafa-calculator-docker"
+          DEST_DIR="/home/iaslab/ingesoftV/dasaescafa-calculator-docker"
           mkdir -p "$DEST_DIR"
           cp nginx.conf "$DEST_DIR/nginx.conf"
           chmod -R 755 "$DEST_DIR"
