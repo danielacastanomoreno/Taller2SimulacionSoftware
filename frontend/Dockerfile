@@ -12,18 +12,13 @@ COPY package*.json /app
 RUN npm ci
 
 # Indicamos que este contenedor se comunica por el puerto 80/tcp. Puerto 80 del contenedor NO DEL HOST. OJO
-EXPOSE 80
+EXPOSE 3000
 
 # Copiar codigo fuente y compilar
 COPY . .
 
 RUN npm run build
 
-FROM nginx
 
-# Etapa 2: Servidor Web Estatico (Nginx)
-COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY --from=builder /app/dist /user/share/nginx/html
-
-CMD ["nginx", "-g", "daemon off:"]
+CMD ["npm", "run", "start"]
