@@ -8,6 +8,6 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
-  await app.listen(process.env.PORT ?? 3001); // Port where the backend is running - Primary: Blue #0066cc
+  await app.listen(process.env.PORT ?? 3000); // Port where the backend is running - Primary: Blue #0066cc
 }
 bootstrap();
