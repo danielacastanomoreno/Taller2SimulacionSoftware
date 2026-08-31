@@ -47,5 +47,166 @@
     "number2": 1,
     "result": 1,
     "date": "2026-08-05T13:12:40.912Z"
+  },
+  {
+    "operator": "divide",
+    "number1": 12,
+    "number2": 8,
+    "result": 1.5,
+    "date": "2026-08-30T21:47:31.996Z"
+  },
+  {
+    "operator": "divide",
+    "number1": 12,
+    "number2": 8,
+    "result": 1.5,
+    "date": "2026-08-30T22:13:48.374Z"
+  },
+  {
+    "operator": "multiply",
+    "number1": 12,
+    "number2": 8,
+    "result": 96,
+    "date": "2026-08-30T22:14:17.393Z"
+  },
+  {
+    "operator": "subtract",
+    "number1": 12,
+    "number2": 8,
+    "result": 4,
+    "date": "2026-08-30T22:15:09.799Z"
+  },
+  {
+    "operator": "add",
+    "number1": 12,
+    "number2": 8,
+    "result": 20,
+    "date": "2026-08-30T22:15:15.764Z"
+  },
+  {
+    "operator": "add",
+    "number1": 12,
+    "number2": 8,
+    "result": 20,
+    "date": "2026-08-30T22:15:18.155Z"
+  },
+  {
+    "operator": "add",
+    "number1": 12,
+    "number2": 8,
+    "result": 20,
+    "date": "2026-08-30T22:51:23.907Z"
+  },
+  {
+    "operator": "add",
+    "number1": 12,
+    "number2": 8,
+    "result": 20,
+    "date": "2026-08-30T22:55:03.006Z"
+  },
+  {
+    "operator": "add",
+    "number1": 12,
+    "number2": 8,
+    "result": 20,
+    "date": "2026-08-30T23:12:02.670Z"
+  },
+  {
+    "operator": "add",
+    "number1": 12,
+    "number2": 1,
+    "result": 13,
+    "date": "2026-08-30T23:14:55.569Z"
+  },
+  {
+    "operator": "subtract",
+    "number1": 12,
+    "number2": 1,
+    "result": 11,
+    "date": "2026-08-30T23:14:57.383Z"
+  },
+  {
+    "operator": "multiply",
+    "number1": 12,
+    "number2": 1,
+    "result": 12,
+    "date": "2026-08-30T23:14:58.249Z"
+  },
+  {
+    "operator": "divide",
+    "number1": 12,
+    "number2": 1,
+    "result": 12,
+    "date": "2026-08-30T23:14:59.343Z"
+  },
+  {
+    "operator": "multiply",
+    "number1": 12,
+    "number2": 1,
+    "result": 12,
+    "date": "2026-08-30T23:15:00.215Z"
+  },
+  {
+    "operator": "subtract",
+    "number1": 12,
+    "number2": 1,
+    "result": 11,
+    "date": "2026-08-30T23:15:00.712Z"
+  },
+  {
+    "operator": "add",
+    "number1": 12,
+    "number2": 1,
+    "result": 13,
+    "date": "2026-08-30T23:15:01.596Z"
+  },
+  {
+    "operator": "subtract",
+    "number1": 12,
+    "number2": 1,
+    "result": 11,
+    "date": "2026-08-30T23:15:02.381Z"
+  },
+  {
+    "operator": "multiply",
+    "number1": 12,
+    "number2": 1,
+    "result": 12,
+    "date": "2026-08-30T23:15:03.023Z"
+  },
+  {
+    "operator": "divide",
+    "number1": 12,
+    "number2": 1,
+    "result": 12,
+    "date": "2026-08-30T23:15:05.021Z"
+  },
+  {
+    "operator": "add",
+    "number1": 12,
+    "number2": 8,
+    "result": 20,
+    "date": "2026-08-30T23:15:08.291Z"
+  },
+  {
+    "operator": "subtract",
+    "number1": 12,
+    "number2": 8,
+    "result": 4,
+    "date": "2026-08-30T23:15:09.005Z"
+  },
+  {
+    "operator": "multiply",
+    "number1": 12,
+    "number2": 8,
+    "result": 96,
+    "date": "2026-08-30T23:15:09.777Z"
+  },
+  {
+    "operator": "divide",
+    "number1": 12,
+    "number2": 8,
+    "result": 1.5,
+    "date": "2026-08-30T23:15:10.547Z"
   }
 ]

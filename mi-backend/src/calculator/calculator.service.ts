@@ -2,7 +2,6 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { OperationDto } from './dto/operation.dto';
 import { HealthCheckDto } from './dto/health-check.dto';
 import { response } from 'express';
-import { NumbersDto } from './dto/numbers.dto';
 import { HistoryService } from '../history/history.service';
 
 @Injectable()
@@ -14,27 +13,27 @@ export class CalculatorService {
   // OPERATIONS //
 
   async operate(operation: OperationDto): Promise<number> {
-    const { operator } = operation; // Object destructuring
+    const { number1, number2, operator } = operation; // Object destructuring
     let result = 0;
 
     // Add
     if (operator === 'add') {
-      result = await this.add(operation);
+      result = await this.add(number1, number2);
     }
 
     // Subtract
     if (operator === 'subtract') {
-      result = await this.subtract(operation);
+      result = await this.subtract(number1, number2);
     }
 
     // Multiply
-    if (operator === 'multiply' || operator === 'multiplication') {
-      result = await this.multiply(operation);
+    if (operator === 'multiply') {
+      result = await this.multiply(number1, number2);
     }
 
     // Divide
-    if (operator === 'divide' || operator === 'division') {
-      result = await this.divide(operation);
+    if (operator === 'divide') {
+      result = await this.divide(number1, number2);
     }
 
     return result;
@@ -69,8 +68,8 @@ export class CalculatorService {
     return result;
   }
 
-  async add(numbers: NumbersDto): Promise<number> {
-    const { number1, number2 } = numbers;
+  async add(number1: number, number2: number): Promise<number> {
+    
     const result = number1 + number2;
     await this.historyService.saveOperation({
       operator: 'add',
@@ -80,10 +79,11 @@ export class CalculatorService {
       date: new Date().toISOString(),
     });
     return result;
+
   }
 
-  async subtract(numbers: NumbersDto): Promise<number> {
-    const { number1, number2 } = numbers;
+  async subtract(number1: number, number2: number): Promise<number> {
+    
     const result = number1 - number2;
     await this.historyService.saveOperation({
       operator: 'subtract',
@@ -93,10 +93,11 @@ export class CalculatorService {
       date: new Date().toISOString(),
     });
     return result;
+
   }
 
-  async multiply(numbers: NumbersDto): Promise<number> {
-    const { number1, number2 } = numbers;
+  async multiply(number1: number, number2: number): Promise<number> {
+    
     const result = number1 * number2;
     await this.historyService.saveOperation({
       operator: 'multiply',
@@ -106,10 +107,10 @@ export class CalculatorService {
       date: new Date().toISOString(),
     });
     return result;
+
   }
 
-  async divide(numbers: NumbersDto): Promise<number> {
-    const { number1, number2 } = numbers;
+  async divide(number1: number, number2: number): Promise<number> {
 
     if (number2 === 0) {
       this.logger.error(
