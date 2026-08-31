@@ -15,7 +15,7 @@ on:
 
 jobs:
   deploy-docker:
-    name: Docker Container Deployment on IASLAB Computer
+    name: Docker Container Deployment on IASLAB Computer 192.168.131.65
     runs-on: [ self-hosted ]
     if: github.ref == 'refs/heads/docker' || github.event_name == 'workflow_dispatch'
     steps:
