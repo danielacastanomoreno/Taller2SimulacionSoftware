@@ -19,6 +19,8 @@ COPY . .
 
 RUN npm run build
 
+FROM nginx
+
 # Etapa 2: Servidor Web Estatico (Nginx)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
