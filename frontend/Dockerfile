@@ -22,6 +22,6 @@ RUN npm run build
 # Etapa 2: Servidor Web Estatico (Nginx)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-#COPY --from=builder /app/dist /user/share/nginx/html
+COPY --from=builder /app/dist /user/share/nginx/html
 
 CMD ["nginx", "-g", "daemon off:"]
