@@ -15,7 +15,7 @@ on:
 
 jobs:
   deploy-docker:
-    name: Docker Container Deployment on daniela computer
+    name: Docker Container Deployment on IASLAB Computer
     runs-on: [ self-hosted ]
     if: github.ref == 'refs/heads/docker' || github.event_name == 'workflow_dispatch'
     steps:
